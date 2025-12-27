@@ -3,6 +3,12 @@ kind: Deployment
 metadata:
   name: register-app-deployment
 spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1  # Allow 1 pod to be killed first
+      maxSurge: 0        # Don't try to create extra pods until space is free
+spec:
   replicas: 2
   selector:
     matchLabels:
